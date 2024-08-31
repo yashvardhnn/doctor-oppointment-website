@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>BHealthy</title>
+	<meta charset="utf-8">
+	<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+	<link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="CareMed demo project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="styles/doctor_profile.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" type="text/css" href="styles/main_styles.css"> -->
+	<link rel="stylesheet" type="text/css" href="styles/home.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="js/url.js"></script>
+	<style>
+		.input-icons i {
+			position: absolute;
+		}
+
+		.input-icons {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.icon {
+			padding: 10px;
+			color: green;
+			min-width: 50px;
+			text-align: center;
+		}
+
+		.input-field {
+			width: 100%;
+			padding: 10px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="super_container">
+
+		<!-- Header -->
+
+		<header class="header trans_200">
+
+			<!-- Top Bar -->
+			<div class="top_bar">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+								<div class="top_bar_item "><a href="#">Request an Appointment</a></div>
+								<div
+									class="top_bar_item_register  d-flex flex-row align-items-center justify-content-start ml-auto">
+									<a href="#con" id="register">Register</a>
+									<div id="con">
+										<h4><input type="radio" name="role" value="1" /> As a Doctor</h4> <br> <br>
+										<h4><input type="radio" name="role" value="0" /> As a Patient</h4>
+									</div>
+									<script>
+										$('input:radio[name="role"]').change(
+											function () {
+												if ($(this).is(':checked') && $(this).val() == '1') {
+													window.location = "doctor_signup.html";
+												}
+												else {
+													window.location = "sign_up.html";
+												}
+											});
+									</script>
+								</div>
+
+								<div class="top_bar_item_logIn  d-flex flex-row align-items-center"><a href="login.html"
+										id="login">Login</a></div>
+
+
+								<div class="dropdown" id="menu">
+									<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+										id="dropdown">hello
+										<span class="caret"></span></button>
+									<ul class="dropdown-content" id="dropdownconfig">
+										<script src="js/navbarconfig.js"></script>
+									</ul>
+
+								</div>
+								<script>
+									function logout() {
+										window.localStorage.clear();
+										window.location.replace("home.html");
+									}
+								</script>
+
+								<script>
+
+
+									if (window.localStorage.getItem('user') == null) {
+										document.getElementById('register').style.display = "block";
+										document.getElementById('login').style.display = "block";
+										document.getElementById('menu').style.display = "none";
+
+
+									}
+									else {
+										document.getElementById('register').style.display = "none";
+										document.getElementById('login').style.display = "none";
+										document.getElementById('menu').style.display = "block";
+
+										var data = window.localStorage.getItem('user');
+										var obj = JSON.parse(data);
+
+
+										document.getElementById('dropdown').innerHTML = obj.name;
+										var my_prescription = document.getElementById("my_prescription");
+										my_prescription.setAttribute('href', "my_prescription.html?id=" + obj.phonenumber)
+
+									}
+								</script>
+
+
+								<div class="top_bar_item_logIn  d-flex flex-row align-items-center" id="username"><a
+										href="login.html" style="display:none;">Nayeem</a></div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Header Content -->
+			<div class="header_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="header_content d-flex flex-row align-items-center justify-content-start">
+								<nav class="main_nav ml-auto">
+									<ul>
+										<li><a href="home.html">Home</a></li>
+										<li><a href="department.html">Department</a></li>
+										<li><a href="doctorList2.html">Doctor</a></li>
+										<li><a href="about.html">About us</a></li>
+										<!-- <li><a href="contact.html">Contact us</a></li> -->
+									</ul>
+								</nav>
+								<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Logo -->
+			<div class="logo_container_outer">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="logo_container">
+								<a href="#">
+									<div
+										class="logo_content d-flex flex-column align-items-start justify-content-center">
+										<div class="logo_line"></div>
+										<div class="logo d-flex flex-row align-items-center justify-content-center">
+											<div class="logo_text">B<span>Healthy</span></div>
+											<div class="logo_box">+</div>
+										</div>
+										<div class="logo_sub">Health Care Center</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="col-md-10  containter">
+
+			<div class="container pull-left col-md-5" style="margin-top: 220px; margin-left: 250px;">
+				<div class="container  pull-left">
+					<div class="image_container"><img id="propic"></div>
+					<div class="containter" id="profile">
+
+					</div>
+				</div>
+			</div>
+
+			<script>
+				function getUrlVars() {
+					var vars = {};
+					var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+						vars[key] = value;
+					});
+					return vars;
+				}
+
+
+				var profile = document.getElementById('profile');
+				var namedoctor = document.createElement('div');
+				namedoctor.setAttribute('class', 'title');
+				// name.textContent = 'hiiiii'
+				profile.appendChild(namedoctor);
+
+				var propic = document.getElementById('propic')
+				var department = document.createElement('div');
+				var degree = document.createElement('div');
+				var doctorlocation = document.createElement('div');
+				var visiting_hour = document.createElement('div');
+				var fee = document.createElement('div');
+
+				department.setAttribute('class', 'title');
+				degree.setAttribute('class', 'title');
+				doctorlocation.setAttribute('class', 'title');
+				visiting_hour.setAttribute('class', 'title');
+				fee.setAttribute('class', 'title');
+				profile.appendChild(department);
+				profile.appendChild(degree);
+				profile.appendChild(doctorlocation);
+				profile.appendChild(visiting_hour);
+				profile.appendChild(fee);
+
+				var id = getUrlVars()["id"];
+
+				var url = backendurl + "api/auth/single_doctor/" + id;
+
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", url, true);
+				xhr.onload = function () {
+					if (this.status == 200) {
+						console.log(this.response);
+						var dataJSON = JSON.parse(this.response)
+						console.log(dataJSON);
+
+						namedoctor.textContent = "Name :    " + dataJSON.name;
+						degree.textContent = "Degree :    " + dataJSON.degree;
+						doctorlocation.textContent = "Location :    " + dataJSON.location;
+						visiting_hour.textContent = "Visiting Hour :     " + dataJSON.visiting_hour;
+						fee.textContent = "Visiting Fee :     " + dataJSON.fee;
+						department.textContent = "Department :    " + dataJSON.department;
+						propic.src = dataJSON.image;
+
+
+					}
+				};
+				xhr.send();
+
+			</script>
+			<!-- ============================================================XXXXXX================================================================-->
+			<div class=" pull-right col-md-4" style="margin-top: 300px;">
+				<div class="date_picker">
+					<div class="input-icons">
+						<i class="fa fa-calendar icon">
+						</i>
+						<input style="padding-left: 50px;cursor: pointer;"  id="datepicker" class="form-control date-picker"
+							data-date-format="yyyy-mm-dd">
+					</div>
+					<script>
+						var request = new XMLHttpRequest()
+						var id = getUrlVars()["id"];
+						var eventDates = {};
+						request.open("GET", backendurl+"api/auth/getall/" + id, true);
+						request.setRequestHeader("Content-Type", "application/json");
+
+						request.onload = function () {
+							// Begin accessing JSON data here
+							if (this.status == 200) {
+								// console.log()
+								var data = JSON.parse(this.response)
+
+								console.log(data)
+								if (data.length > 0) {
+									data.forEach((u) => {
+										var apdate = u.date;
+										var apdates = apdate.split('-');
+										var apdateval = apdates[1] +'-'+ apdates[0] +'-'+ apdates[2];
+
+										eventDates[new Date(apdateval)] = new Date(apdateval);
+									});
+								}
+							}
+							else {
+								alert("No appointment possible today. Try different date or after few hour.")
+							}
+							
+						}
+
+						request.send();
+
+						// eventDates[new Date('12-11-2019')] = new Date('12-11-2019');
+
+						$('#datepicker').datepicker({
+							format: 'dd-mm-yyyy',
+							beforeShowDay: function (date) {
+								var dayOfWeek = eventDates[date];
+								// 0 : Sunday, 1 : Monday, ...
+								if (dayOfWeek) return [true];
+								else return [false];
+							}
+
+						});
+
+					</script>
+
+					<!-- ============================================================XXXXXX================================================================-->
+					<!-- ============================================================XXXXXX================================================================-->
+					<!-- ============================================================XXXXXX================================================================-->
+					<!-- ============================================================XXXXXX================================================================-->
+
+
+
+					<div class="appointment">
+						<div class="button appointment_btn">
+							<a href=" javascript: make_appointment();">Make an Appointment</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script>
+			function make_appointment() {
+
+				var data = window.localStorage.getItem('user');
+				var dataJSON1 = JSON.parse(data);
+				if (data !== null) {
+					var roleuser;
+					dataJSON1.authorities.forEach(doctorJSON => {
+						roleuser = doctorJSON.authority;
+					});
+				}
+
+				var today = new Date();
+				var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+				var currentdates = date.split('-')
+				var currentdateval = Number(currentdates[2] + currentdates[1] + currentdates[0]);
+
+				var apdate = document.getElementById('datepicker').value;
+				var apdates = apdate.split('/');
+				var apdateval = Number(apdates[2] + apdates[0] + apdates[1]);
+				console.log(currentdateval + "   " + apdateval)
+				if (currentdateval > apdateval) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Please select a valid date',
+						footer: '<a href = "home.html"><b>Go to home</b></a>'
+					})
+				}
+				else if (window.localStorage.getItem('user') == null || roleuser == "ROLE_DOCTOR") {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Login as Patient First to Make Appointment',
+						footer: '<a href = "login.html"><b>Login</b></a>'
+					})
+				}
+
+				else {
+					var date = document.getElementById('datepicker').value;
+					var request = new XMLHttpRequest()
+					var dataS = window.localStorage.getItem('user');
+					var dataJson = JSON.parse(dataS)
+					console.log(date)
+
+					var apdates = date.split('/');
+					var apdateval = apdates[1] +'-'+ apdates[0] +'-'+ apdates[2];
+					// Open a new connection, using the GET request on the URL endpoint
+					var data;
+					request.open("POST", backendurl+"api/makeappointment", false);
+					request.setRequestHeader("Authorization", "Bearer " + dataJson.accessToken);
+					request.setRequestHeader("Content-Type", "application/json");
+					// 			doctorphonenumber;
+					// String patientname,patientphonenumber,date
+					var id = getUrlVars()["id"];
+					data = JSON.stringify({ "doctorphonenumber": id, "patientname": dataJson.name, "patientphonenumber": dataJson.phonenumber, "date": apdateval });
+					request.onload = function () {
+						// Begin accessing JSON data here
+						if (this.status == 200) {
+							alert("Appointment Accepted. Please present timely")
+							window.location.replace("home.html")
+						}
+						else {
+							alert("No appointment possible today. Try different date or after few hour.")
+						}
+						var data = JSON.parse(this.response)
+						console.log(data)
+					}
+
+					request.send(data);
+				}
+
+			}
+		</script>
+
+
+
+
+	</div>
+
+	</div>
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="styles/bootstrap4/popper.js"></script>
+	<script src="styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="plugins/easing/easing.js"></script>
+	<script src="plugins/parallax-js-master/parallax.min.js"></script>
+	<script src="js/custom.js"></script>
+
+
+</body>
+
+</html>

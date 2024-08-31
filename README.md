@@ -1,2 +1,2 @@
-# doctor-oppointment-website
-Doctor Oppointment Website
+# BHealthy
+Doctor Appointment Management System

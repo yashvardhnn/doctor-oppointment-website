@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+   @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: black;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.searcha {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 37px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+<title>BHealthy</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="CareMed demo project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/department.css">
+<link rel="stylesheet" type="text/css" href="styles/home.css">
+<script src="js/url.js"></script>
+</head>
+
+<body>
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header trans_200">
+
+			<!-- Top Bar -->
+			<div class="top_bar">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+								<div class="top_bar_item "><a href="#">Request an Appointment</a></div>
+								<div
+									class="top_bar_item_register  d-flex flex-row align-items-center justify-content-start ml-auto">
+									<a href="#con" id="register">Register</a>
+									<div id="con">
+										<h4><input type="radio" name="role" value="1" /> As a Doctor</h4> <br> <br>
+										<h4><input type="radio" name="role" value="0" /> As a Patient</h4>
+									</div>
+									<script>
+										$('input:radio[name="role"]').change(
+											function () {
+												if ($(this).is(':checked') && $(this).val() == '1') {
+													window.location = "doctor_signup.html";
+												}
+												else {
+													window.location = "sign_up.html";
+												}
+											});
+									</script>
+								</div>
+
+								<div class="top_bar_item_logIn  d-flex flex-row align-items-center"><a href="login.html"
+										id="login">Login</a></div>
+
+
+								<div class="dropdown" id="menu">
+									<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+										id="dropdown">hello
+										<span class="caret"></span></button>
+									<ul class="dropdown-content">
+										<li><a href="patient_profile.html">My Profile</a></li>
+										
+										<li><a id="my_prescription">My Prescription</a></li>
+										<li><a href="addprescription.html">ADD Prescription</a></li>
+										<li><a href="myappointment.html">Track My Appointment</a></li>
+										<li><a href="javascript: logout()">Logout</a></li>
+									</ul>
+									
+								</div>
+								<script>
+									function logout() {
+										window.localStorage.clear();
+										window.location.replace("home.html");
+									}
+								</script>
+								<script>
+
+
+									if (window.localStorage.getItem('user') == null) {
+										document.getElementById('register').style.display = "block";
+										document.getElementById('login').style.display = "block";
+										document.getElementById('menu').style.display = "none";
+
+
+									}
+									else {
+										document.getElementById('register').style.display = "none";
+										document.getElementById('login').style.display = "none";
+										document.getElementById('menu').style.display = "block";
+
+										var data = window.localStorage.getItem('user');
+										var obj = JSON.parse(data);
+
+
+										document.getElementById('dropdown').innerHTML = obj.name;
+										var my_prescription = document.getElementById("my_prescription");
+										my_prescription.setAttribute('href',"my_prescription.html?id="+obj.phonenumber)
+
+									}
+								</script>
+
+
+								<div class="top_bar_item_logIn  d-flex flex-row align-items-center" id="username"><a
+										href="login.html" style="display:none;">Nayeem</a></div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Header Content -->
+			<div class="header_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="header_content d-flex flex-row align-items-center justify-content-start">
+								<nav class="main_nav ml-auto">
+									<ul>
+										<li><a href="home.html">Home</a></li>
+										<li><a href="department.html">Department</a></li>
+										<li><a href="doctorList2.html">Doctor</a></li>
+										 <li><a href="about.html">About us</a></li>
+										<!-- <li><a href="contact.html">Contact us</a></li> --> 
+									</ul>
+								</nav>
+								<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Logo -->
+			<div class="logo_container_outer">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="logo_container">
+								<a href="#">
+									<div
+										class="logo_content d-flex flex-column align-items-start justify-content-center">
+										<div class="logo_line"></div>
+										<div class="logo d-flex flex-row align-items-center justify-content-center">
+											<div class="logo_text">B<span>Healthy</span></div>
+											<div class="logo_box">+</div>
+										</div>
+										<div class="logo_sub">Health Care Center</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+    <!-- <div class="search">
+		<div class="container">
+			<div class="row row-lg-eq-height">
+				
+				
+				<div class="col-lg-7">
+					<div class="search_content">
+						<div class="search_input"><input type="text" placeholder="Department"></div>
+						<div class="button search_button">
+							<a href="#">search</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <div class="wrap" style="margin-top: 100px; margin-bottom: 70px;">
+            <div class="searcha">
+               <input type="text" class="searchTerm" placeholder="What Department are you looking for?">
+               <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+            </div>
+         </div>
+     -->
+
+    </div>
+    
+    
+
+    <div class="departments" style="margin-top: 250px;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                </div>
+            </div>
+            <div class="row departmets_row">
+                
+                <!-- Department -->
+                <div class="col-lg-4 col-md-6 department_col">
+                    <a href="singleDepartment.html?dept=Dental">
+                        <div class="department text-center trans_200">
+                            <!---  <div class="department_icon"><img class="svg" src="images/service_1.svg" alt=""></div>  -->
+                            <div class="department_title trans_200">Dental</div>
+                            <div class="department_text">
+                                <p>This department offers a range of dental services, including cleanings, root canals, dental implants, and more. They accept Medicaid and provide lower-cost services in their student dental clinic. Dental residents, who have completed dental school, receive additional training in specialized areas like root canals, orthodontics, and oral surgery.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Department -->
+                <div class="col-lg-4 col-md-6 department_col">
+                    <a href="singleDepartment.html?dept=Neurology">
+                        <div class="department text-center trans_200">
+                            <!--  <div class="department_icon"><img class="svg" src="images/service_2.svg" alt=""></div>  -->
+                            <div class="department_title trans_200">Neurology</div>
+                            <div class="department_text">
+                                <p>This department specialty that deals with the diagnosis, treatment, and management of disorders and diseases affecting the brain, spinal cord, and nervous system. Neurologists, the medical professionals who work in this department, are trained to evaluate and treat a wide range of conditions,</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Department -->
+                <div class="col-lg-4 col-md-6 department_col">
+                    <a href="singleDepartment.html?dept=Orthopedics">
+                        <div class="department text-center trans_200">
+                            <!-- <div class="department_icon"><img class="svg" src="images/service_3.svg" alt=""></div> -->
+                            <div class="department_title trans_200">Orthopedics</div>
+                            <div class="department_text">
+                                <p>Orthopedics is a broad-based medical and surgical specialty dedicated to the prevention, diagnosis, and treatment of diseases and injuries affecting the musculoskeletal system. This complex system comprises bones, joints, ligaments, tendons, muscles, and nerves, which collectively enable movement, provide support, and maintain the body’s structural integrity.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="departments">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                </div>
+            </div>
+            <div class="row departmets_row">
+                
+                <!-- Department -->
+                <div class="col-lg-4 col-md-6 department_col">
+                    <a href="singleDepartment.html?dept=Pediatric">
+                        <div class="department text-center trans_200">
+                            <!---  <div class="department_icon"><img class="svg" src="images/service_1.svg" alt=""></div>  -->
+                            <div class="department_title trans_200">Pediatric</div>
+                            <div class="department_text">
+                                <p>ths department is the branch of medicine dealing with the health and medical care of infants, children, and adolescents from birth up to the age of 18.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Department -->
+                <div class="col-lg-4 col-md-6 department_col">
+                    <a href="singleDepartment.html?dept=Oncology">
+                        <div class="department text-center trans_200">
+                            <!--  <div class="department_icon"><img class="svg" src="images/service_2.svg" alt=""></div>  -->
+                            <div class="department_title trans_200">Oncology</div>
+                            <div class="department_text">
+                                <p>Oncology is the branch of medicine that focuses on the diagnosis, treatment, and prevention of cancer.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Department -->
+                <div class="col-lg-4 col-md-6 department_col">
+                    <a href="singleDepartment.html?dept=Urology">
+                        <div class="department text-center trans_200">
+                            <!-- <div class="department_icon"><img class="svg" src="images/service_3.svg" alt=""></div> -->
+                            <div class="department_title trans_200">Urology</div>
+                            <div class="department_text">
+                                <p>Urology is a surgical specialty that focuses on the diagnosis, treatment, and management of diseases and disorders affecting the urinary tract and male reproductive organs. It is a branch of medicine that deals with the health issues of the male and female urinary tract, and the male reproductive system.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+	<footer class="footer-area section_gap">
+			<div class="container">
+			  <div class="row">
+				
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+				  <h4>Quick Links</h4>
+				  <ul>
+					<li><a href="department.html">Department</a></li>
+					
+					<li><a href="doctorList2.html">All Doctors</a></li>
+				  </ul>
+				</div>
+		
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+				  <h4> Doctor Based on Department</h4>
+				  <ul>
+					<li><a href="singleDepartment.html?dept=Neurology">Neorology</a></li>
+					<li><a href="singleDepartment.html?dept=Dental">Dental</a></li>
+					<li><a href="singleDepartment.html?dept=Orthopedics">Orthopedics</a></li>
+					<li><a href="singleDepartment.html?dept=Pediatric">Pediatric</a></li>
+					<li><a href="singleDepartment.html?dept=Oncology">Oncology</a></li>
+				  </ul>
+				</div>
+				<div class="col-lg-3 col-md-7 single-footer-widget ml-auto ">
+				  <h4>Contacts</h4>
+				  <ul>
+					<li style="color: white;">VereBridge</li>
+					<li style="color: gray;">Mobile No. +918266858326</li>
+					<li style="color: white;">Yash Vardhan</li>
+					<li style="color: gray;">Mobile No. +918266858326</li>
+		
+				  </ul>
+				</div>
+		
+			  </div>
+			  <div class="footer-bottom row align-items-center">
+				<p class="footer-text m-0 col-lg-8 col-md-12">
+				  Site Developed & Managed By: yash
+				</p>
+		
+			  </div>
+			</div>
+		  </footer>
+    
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="styles/bootstrap4/popper.js"></script>
+    <script src="styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="js/custom.js"></script>
+    
+    </body>
+    </html>
